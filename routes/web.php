@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |-----------------------------------------------------------------------
-| Task 1 Authorization. 
+| Task 1 Authorization.
 | You can modify the accessibility of your routes for different users here
 |-----------------------------------------------------------------------
 */
@@ -32,9 +32,14 @@ Route::get('logout', [HomeController::class, 'logout'])->name('logout');
 
 Route::group(['prefix' => 'adoptions', 'as' => 'adoptions.'], function ()
 {
-    Route::get('create', [AdoptionController::class, 'create'])->name('create');
-    Route::post('/', [AdoptionController::class, 'store'])->name('store');
-    Route::get('mine', [AdoptionController::class, 'mine'])->name('mine');
+    Route::get('create', [AdoptionController::class, 'create'])
+        ->name('create')
+        ->middleware('auth');
+    Route::post('/', [AdoptionController::class, 'store'])
+        ->name('store');
+    Route::get('mine', [AdoptionController::class, 'mine'])
+        ->name('mine')
+        ->middleware('auth');
     Route::get('{adoption}', [AdoptionController::class, 'show'])->name('show');
     Route::post('{adoption}/adopt', [AdoptionController::class, 'adopt'])->name('adopt');
     Route::delete('{adoption}/adopt', [AdoptionController::class, 'destroy'])->name('destroy');

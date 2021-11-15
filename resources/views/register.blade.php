@@ -12,7 +12,7 @@
             </div>
             <div class="card-body">
                 <!-- Task 2 Guest, step 5: add the HTTP method and url as instructed-->
-                <form method="" action="#">
+                <form method="post" action="{{route('doRegister')}}">
                     @csrf
                     <!-- Task 2 Guest, step 3: add register fields as instructed-->
                     <!-- Tip: we add the element name for you as an inspiration on how you can add the rest of the inputs -->
@@ -23,10 +23,36 @@
                             <div class="form-text text-danger">{{ $errors->first('name') }}</div>
                         @endif
                     </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" name="email" class="form-control email" id="email" value="{{ old('email') }}">
+                        @if($errors->has('email'))
+                            <div class="form-text text-danger">{{ $errors->first('email') }}</div>
+                        @endif
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">password</label>
+                        <input type="password" name="password" class="form-control password" id="password" value="{{ old('password') }}">
+                        @if($errors->has('password'))
+                            <div class="form-text text-danger">{{ $errors->first('password') }}</div>
+                        @endif
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password-confirmation" class="form-label">confirm password</label>
+                        <input type="password" name="password_confirmation" class="form-control password-confirmation" id="password_confirmation"  }}>
+                        @if($errors->has('password-confirmation'))
+                            <div class="form-text text-danger">{{ $errors->first('password-confirmation') }}</div>
+                        @endif
+                    </div>
                     <!-- end of Tip -->
+
 
                     <div class="d-flex justify-content-between align-items-center">
                         <!-- Task 2 Guest, step 4: add submit button-->
+                        <button type="submit" class="register-submit">Submit</button>
                     </div>
                 </form>
             </div>
@@ -34,3 +60,4 @@
     </div>
 
 @endsection
+
