@@ -60,11 +60,21 @@ class AdoptionController extends Controller
 
     public function adopt(Adoption $adoption)
     {
-        
-        if (request()->user()->id == $adoption->listed_by) {
+
+        //METHOD 1 - using AdoptionPolicy
+        $this->authorize('adopt', $adoption);
+
+        /*
+        //METHOD 2 - using AdoptionPolicy#2
+        if (request()->user()->cannot('adopt', $adoption)){
             abort(403, "you cannot adopt your own pet");
         }
 
+        //METHOD 3 - not using policy
+        if (request()->user()->id == $adoption->listed_by) {
+            abort(403, "you cannot adopt your own pet");
+        }
+        */
         $adoption->adopted_by = auth()->user()->id;
         $adoption->save();
         /*

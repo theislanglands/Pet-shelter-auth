@@ -29,7 +29,7 @@ class AdoptionPolicy
     }
 
     public function adopt($user, $adoption){
-        dd($adoption->name);
+        //dd($adoption->name);
         if ($adoption->listed_by == null) return true;
         return $user->id != $adoption->listed_by;
     }

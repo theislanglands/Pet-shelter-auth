@@ -27,9 +27,6 @@
 
 
 
-
-
-
                         @if($adoption->adopted_by != null)
                             @if($adoption->adopted_by == auth()->id())
                                 <p class="text-success">This pet has been adopted by you :)</p>
